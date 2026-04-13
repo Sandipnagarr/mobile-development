@@ -1,0 +1,22 @@
+{
+  "expo": {
+
+    "icon": "./assets/9391723.png",
+
+    "splash": {
+      "backgroundColor": "#000000"
+    },
+    "name": "myApp",
+    "slug": "myApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.anonymous.myApp"
+    },
+    "web": {}
+  }
+}
