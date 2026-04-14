@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 const router = express.Router();
-
+// create token here //
 const createToken = (user) => {
   const secret = process.env.JWT_SECRET || "dev_secret_change_me";
 
@@ -18,7 +18,8 @@ const createToken = (user) => {
   );
 };
 
-router.post("/register", async (req, res) => {
+router.post("/register",
+  async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -29,29 +30,31 @@ router.post("/register", async (req, res) => {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
+    // find the use is already exist or not based on the email
     const existingUser = await User.findOne({ email: normalizedEmail });
-
+// if user exist than retun status with messege 
     if (existingUser) {
       return res.status(409).json({
         message: "User already exists.",
       });
     }
-
+   // hash passwoard 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await User.create({
+
+    const createuser = await User.create({
       email: normalizedEmail,
       password: hashedPassword,
     });
 
-    const token = createToken(user);
+    const token = createToken(createuser);
 
     return res.status(201).json({
       message: "User registered successfully.",
       token,
-      user: {
-        id: user._id,
-        email: user.email,
+      createuser: {
+        id: createuser._id,
+        email: createuser.email,
       },
     });
   } catch (error) {
@@ -108,3 +111,18 @@ router.post("/login", async (req, res) => {
 });
 
 module.exports = router;
+/****
+1.Setup basic Node.js server with Socket.IO for real-time communication
+2.Implemented WebSocket connection between frontend and backend
+3.Implemented real-time chat functionality between multiple users
+4.Designed chat UI with message list using map and state management
+5.Understood WebSocket flow (client → server → broadcast → client)
+6.design a messege screen to send messege and recieve message with two users
+7.implemented logoout in the page to redirect to login page
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */

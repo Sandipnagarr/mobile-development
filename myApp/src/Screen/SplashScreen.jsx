@@ -27,14 +27,7 @@ const SplashIntro = ({ onFinish }) => {
   );
 };
 
-/**1. Fixed Site Priority checkbox behavior so unchecking it also removes plotted icons from the map.
- * 7.github issued resolved with prateek sir(problem remote branch not pushed after fix the issue)
-2.Fixed dependent layer for the Toilets section so child Site Priority visuals are cleared when the parent layer is unchecked. 
-3.merge the code and resolve the merge conflict, and push the code ,also added the open area layer check box
-4.Debugged the mobile app login issue by tracing the full frontend and backend authentication flow
-5.Fixed the React Native login screen by correcting auth storage handling with AsyncStorage and validating token save flow
-6.
-*/
+
 
 
 const styles = StyleSheet.create({
