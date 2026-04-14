@@ -1,5 +1,6 @@
 {
   "expo": {
+     "jsEngine": "hermes",
 
     "icon": "./assets/9391723.png",
 

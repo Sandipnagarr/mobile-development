@@ -22,7 +22,7 @@ function BackToHomeButton({ navigation }) {
   );
 }
 
-export default function TabNavigator() {
+export default function TabNavigator({ onLogout }) {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -56,10 +56,10 @@ export default function TabNavigator() {
       />
 
       <Tab.Screen
-        name="Wishlist"
+        name="Chat"
         component={WishlistScreen}
         options={({ navigation }) => ({
-          title: "Wishlist",
+          title: "Messege",
           headerLeft: () => <BackToHomeButton navigation={navigation} />,
           tabBarIcon: ({ size, color }) => (
             <Ionicons name="heart" size={size} color={color} />
@@ -80,7 +80,6 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
         options={({ navigation }) => ({
           title: "Profile",
           headerLeft: () => <BackToHomeButton navigation={navigation} />,
@@ -88,7 +87,9 @@ export default function TabNavigator() {
             <Ionicons name="person" size={size} color={color} />
           ),
         })}
-      />
+      >
+        {(props) => <ProfileScreen {...props} onLogout={onLogout} />}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 }
