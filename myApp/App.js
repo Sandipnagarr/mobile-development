@@ -3,6 +3,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import AppNavigator from "./src/Navigation/AppNavigator.jsx";
 import { useState } from "react";
 import SplashIntro from "./src/Screen/SplashScreen.jsx";
+import { ThemeProvider } from "./src/Screen/ThemeContext.jsx";
   
 
 export default function App() {
@@ -11,10 +12,12 @@ export default function App() {
     return<SplashIntro onFinish={() => setShowSplash(false)} />;
   }
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <AppNavigator />
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <ThemeProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <AppNavigator />
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </ThemeProvider>
   );
 }

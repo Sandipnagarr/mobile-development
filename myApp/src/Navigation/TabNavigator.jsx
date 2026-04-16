@@ -62,7 +62,7 @@ export default function TabNavigator({ onLogout }) {
           title: "Messege",
           headerLeft: () => <BackToHomeButton navigation={navigation} />,
           tabBarIcon: ({ size, color }) => (
-            <Ionicons name="heart" size={size} color={color} />
+            <Ionicons name="chatbubble-outline" size={size} color={color} />
           ),
         })}
       />

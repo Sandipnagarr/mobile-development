@@ -3,6 +3,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
+
+
+
 const router = express.Router();
 // create token here //
 const createToken = (user) => {
@@ -112,13 +115,13 @@ router.post("/login", async (req, res) => {
 
 module.exports = router;
 /****
-1.Setup basic Node.js server with Socket.IO for real-time communication
-2.Implemented WebSocket connection between frontend and backend
-3.Implemented real-time chat functionality between multiple users
-4.Designed chat UI with message list using map and state management
-5.Understood WebSocket flow (client → server → broadcast → client)
-6.design a messege screen to send messege and recieve message with two users
-7.implemented logoout in the page to redirect to login page
+1.Setup basic Node.js server with Socket.IO for real-time communication 70
+2.Implemented WebSocket connection between frontend and backend  90
+3.Implemented real-time chat functionality between multiple users  70 
+4.Designed chat UI with message list using map and state management  50
+5.Understood WebSocket flow (client → server → broadcast → client) 
+6.design a messege screen to send messege and recieve message with two users 70
+7.implemented logoout in the page to redirect to login page 50
  * 
  * 
  * 

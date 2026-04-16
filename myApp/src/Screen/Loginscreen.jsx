@@ -1,3 +1,222 @@
+// import React, { useState } from "react";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
+// import {
+//   Alert,
+//   Pressable,
+//   StyleSheet,
+//   Text,
+//   TextInput,
+//   View,
+// } from "react-native";
+// import { SafeAreaView } from "react-native-safe-area-context";
+// import axios from "axios";
+
+// const Loginscreen = ({ onLogin }) => {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [isLoading, setIsLoading] = useState(false);
+
+//   const Loginhandel = async () => {
+//     const normalizedEmail = email.trim().toLowerCase();
+
+//     if (!normalizedEmail || !password) {
+//       Alert.alert("Missing details", "Please fill all the fields.");
+//       return;
+//     }
+
+//     try {
+//       setIsLoading(true);
+
+//       const response = await fetch("http://10.0.2.2:5000/api/auth/login", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           email: normalizedEmail,
+//           password,
+//         }),
+//       });
+
+//       const data = await response.json();
+//       console.log("Login response:", data);
+
+//       if (!response.ok) {
+//         Alert.alert("Login failed", data.message || "Unable to login.");
+//         return;
+//       }
+
+//       if (!data.token) {
+//         Alert.alert("Login failed", "Login token was not returned.");
+//         return;
+//       }
+
+//       await AsyncStorage.setItem("token", data.token);
+
+//       if (data.user) {
+//         await AsyncStorage.setItem("user", JSON.stringify(data.user));
+//       }
+
+//       Alert.alert("Success", "Login successful.");
+//       onLogin?.();
+//     } catch (error) {
+//       console.log("Login error:", error);
+//       Alert.alert("Server error", "Could not connect to the login service.");
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+//     const register = async () => {
+//       try {
+//         const res = await axios.post("http://10.0.2.2:5000/api/auth/register", {
+//           name: name, // include if needed
+//           email: email,
+//           password: password,
+//         });
+
+//         console.log("Registration successful");
+//         console.log(res.data);
+//       } catch (error) {
+//         console.log(
+//           "Registration error:",
+//           error.response?.data || error.message,
+//         );
+//       }
+//     };
+
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <View style={styles.content}>
+//         <View style={styles.heroCard}>
+//           <Text style={styles.badge}>Map Access</Text>
+//           <Text style={styles.title}>Welcome Back</Text>
+//           <Text style={styles.subtitle}>
+//             Log in to continue to your routes, saved places, and app tools.
+//           </Text>
+//         </View>
+
+//         <View style={styles.formCard}>
+//           <Text style={styles.label}>Email</Text>
+//           <TextInput
+//             placeholder="Enter your email"
+//             placeholderTextColor="#7b8794"
+//             value={email}
+//             onChangeText={setEmail}
+//             keyboardType="email-address"
+//             autoCapitalize="none"
+//             style={styles.input}
+//           />
+
+//           <Text style={styles.label}>Password</Text>
+//           <TextInput
+//             placeholder="Enter your password"
+//             placeholderTextColor="#7b8794"
+//             value={password}
+//             onChangeText={setPassword}
+//             secureTextEntry={true}
+//             style={styles.input}
+//           />
+
+//           <Pressable style={styles.loginButton} onPress={Loginhandel}>
+//             <Text style={styles.loginButtonText}>
+//               {isLoading ? "Logging in..." : "Login"}
+//             </Text>
+//           </Pressable>
+
+//           <Text style={styles.footerText}>
+//             Use your account credentials to open the app home page after login.
+//           </Text>
+//         </View>
+//       </View>
+//     </SafeAreaView>
+//   );
+// };
+
+// export default Loginscreen;
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#cf9f45",
+//   },
+//   content: {
+//     flex: 1,
+//     justifyContent: "center",
+//     paddingHorizontal: 22,
+//     paddingVertical: 24,
+//   },
+//   heroCard: {
+//     backgroundColor: "#12392e",
+//     borderRadius: 24,
+//     padding: 24,
+//     marginBottom: 18,
+//   },
+//   badge: {
+//     alignSelf: "flex-start",
+//     backgroundColor: "#f0c76f",
+//     color: "#173124",
+//     paddingHorizontal: 12,
+//     paddingVertical: 6,
+//     borderRadius: 999,
+//     fontSize: 12,
+//     fontWeight: "700",
+//     marginBottom: 16,
+//   },
+//   title: {
+//     color: "#ffffff",
+//     fontSize: 30,
+//     fontWeight: "800",
+//     marginBottom: 10,
+//   },
+//   subtitle: {
+//     color: "#d2e0d9",
+//     fontSize: 15,
+//     lineHeight: 22,
+//   },
+//   formCard: {
+//     backgroundColor: "#b7c5da",
+//     borderRadius: 24,
+//     padding: 20,
+//   },
+//   label: {
+//     color: "#24323f",
+//     fontSize: 14,
+//     fontWeight: "700",
+//     marginBottom: 8,
+//   },
+//   input: {
+//     height: 52,
+//     backgroundColor: "#fbfcfd",
+//     borderWidth: 1,
+//     borderColor: "#205fa8",
+//     borderRadius: 14,
+//     paddingHorizontal: 16,
+//     color: "#1f2933",
+//     fontSize: 15,
+//     marginBottom: 16,
+//   },
+//   loginButton: {
+//     backgroundColor: "#d96f43",
+//     height: 52,
+//     borderRadius: 14,
+//     alignItems: "center",
+//     justifyContent: "center",
+//     marginTop: 8,
+//   },
+//   loginButtonText: {
+//     color: "#ffffff",
+//     fontSize: 16,
+//     fontWeight: "800",
+//   },
+//   footerText: {
+//     marginTop: 16,
+//     color: "#687582",
+//     fontSize: 13,
+//     lineHeight: 19,
+//     textAlign: "center",
+//   },
+// });
+
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -9,23 +228,27 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import axios from "axios";
 
 const Loginscreen = ({ onLogin }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState(""); // email state
+  const [password, setPassword] = useState(""); // password state
+  const [isLoading, setIsLoading] = useState(false); // loading
+  const [isRegister, setIsRegister] = useState(false); // toggle login/register
 
+  //LOGIN FUNCTION
   const Loginhandel = async () => {
-    const normalizedEmail = email.trim().toLowerCase();
+    const normalizedEmail = email.trim().toLowerCase(); // normalize email
 
     if (!normalizedEmail || !password) {
-      Alert.alert("Missing details", "Please fill all the fields.");
+      Alert.alert("Missing details", "Please fill all the fields."); // it would retrun alert id email and password not found 
       return;
     }
 
     try {
-      setIsLoading(true);
+      setIsLoading(true); // in the starting loder (ture) it would load till the response 
 
+      // login API call
       const response = await fetch("http://10.0.2.2:5000/api/auth/login", {
         method: "POST",
         headers: {
@@ -38,20 +261,17 @@ const Loginscreen = ({ onLogin }) => {
       });
 
       const data = await response.json();
-      console.log("Login response:", data);
+      console.log('json data',data)// convert response
 
       if (!response.ok) {
         Alert.alert("Login failed", data.message || "Unable to login.");
         return;
       }
 
-      if (!data.token) {
-        Alert.alert("Login failed", "Login token was not returned.");
-        return;
-      }
-
+      // store token
       await AsyncStorage.setItem("token", data.token);
 
+      // store user (optional)
       if (data.user) {
         await AsyncStorage.setItem("user", JSON.stringify(data.user));
       }
@@ -60,9 +280,35 @@ const Loginscreen = ({ onLogin }) => {
       onLogin?.();
     } catch (error) {
       console.log("Login error:", error);
-      Alert.alert("Server error", "Could not connect to the login service.");
+      Alert.alert("Server error", "Could not connect to server.");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  //  REGISTER FUNCTION
+  const register = async () => {
+    if (!email || !password) {
+      Alert.alert("Missing details", "Enter email & password");
+      return;
+    }
+
+    try {
+      // register API call
+      const res = await axios.post("http://10.0.2.2:5000/api/auth/register", {
+        email: email,
+        password: password,
+      });
+
+      console.log("Registration successful");
+
+      Alert.alert("Success", "Registered successfully");
+
+      setIsRegister(false); // switch back to login
+    } catch (error) {
+      console.log("Registration error:", error.response?.data || error.message);
+
+      Alert.alert("Error", "Registration failed");
     }
   };
 
@@ -71,7 +317,12 @@ const Loginscreen = ({ onLogin }) => {
       <View style={styles.content}>
         <View style={styles.heroCard}>
           <Text style={styles.badge}>Map Access</Text>
-          <Text style={styles.title}>Welcome Back</Text>
+
+          {/* title change only */}
+          <Text style={styles.title}>
+            {isRegister ? "Create Account" : "Welcome Back"}
+          </Text>
+
           <Text style={styles.subtitle}>
             Log in to continue to your routes, saved places, and app tools.
           </Text>
@@ -81,7 +332,6 @@ const Loginscreen = ({ onLogin }) => {
           <Text style={styles.label}>Email</Text>
           <TextInput
             placeholder="Enter your email"
-            placeholderTextColor="#7b8794"
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
@@ -92,16 +342,28 @@ const Loginscreen = ({ onLogin }) => {
           <Text style={styles.label}>Password</Text>
           <TextInput
             placeholder="Enter your password"
-            placeholderTextColor="#7b8794"
             value={password}
             onChangeText={setPassword}
             secureTextEntry={true}
             style={styles.input}
           />
 
-          <Pressable style={styles.loginButton} onPress={Loginhandel}>
+          {/* MAIN BUTTON (login/register switch) */}
+          <Pressable
+            style={styles.loginButton}
+            onPress={isRegister ? register : Loginhandel}
+          >
             <Text style={styles.loginButtonText}>
-              {isLoading ? "Logging in..." : "Login"}
+              {isRegister ? "Register" : isLoading ? "Logging in..." : "Login"}
+            </Text>
+          </Pressable>
+
+          {/* SWITCH TEXT */}
+          <Pressable onPress={() => setIsRegister(!isRegister)}>
+            <Text style={{ textAlign: "center", marginTop: 10, color: "blue" }}>
+              {isRegister
+                ? "Already have an account? Login"
+                : "Don't have an account? Register"}
             </Text>
           </Pressable>
 
@@ -113,7 +375,15 @@ const Loginscreen = ({ onLogin }) => {
     </SafeAreaView>
   );
 };
-
+/*
+Implemented registration API integration and Developed registration feature with API call and input validation
+Implemented audio recording and sending using expo-av and Debugged and resolved build and native module issues
+ make two builds after fixed isssue
+Added toggle functionality between login and register screens
+Added audio playback functionality in chat messages
+Implemented global dark mode using Context API
+Applied dynamic UI styling based on theme state
+*/
 export default Loginscreen;
 
 const styles = StyleSheet.create({

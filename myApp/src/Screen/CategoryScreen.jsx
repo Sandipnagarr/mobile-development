@@ -127,17 +127,3 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 });
-
-
-
-/**
- * 
- 1.   design a login screen with email and password fields, and a login button. and two different more cards
-      create an api for register the new users and create an api for loging the users 
- i    mplememted loging button funtionlity implemeted funtions when click
- 4.   fetch the api on frontend and bind that to working 
- 5.   resolve the issue shwoing loging failed debugged     
-      try to make build of new added funtionlity but three times 
- 2.
- 2.
- */
